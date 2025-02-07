@@ -1,0 +1,16 @@
+const firebaseConfig={apiKey:"AIzaSyBI_6e7KQs4NBJ9ZaLe1FaPxV3xcYE8t3g",authDomain:"donflix-a85da.firebaseapp.com",databaseURL:"https://donflix-a85da-default-rtdb.firebaseio.com",projectId:"donflix-a85da",storageBucket:"donflix-a85da.firebasestorage.app",messagingSenderId:"236646922585",appId:"1:236646922585:web:d5a6778879dfb58eb03448"};firebase.initializeApp(firebaseConfig);const database=firebase.database();const auth=firebase.auth();const tablasPeliculas=["peliculas","peliculas2","peliculas3","peliculas4","peliculas5","peliculas6"];function cargarPeliculas(){const urlParams=new URLSearchParams(window.location.search);const peliculaId=urlParams.get('id');const detalle=document.getElementById('pelicula-detalle');detalle.innerHTML='';tablasPeliculas.forEach((tabla,index)=>{const peliculaRef=firebase.database().ref(`${tabla}/${peliculaId}`);peliculaRef.once('value',function(snapshot){const pelicula=snapshot.val();if(pelicula){detalle.innerHTML+=`
+    <div class="pelicula-card">
+        <img src="${pelicula.imagen}" alt="${pelicula.titulo}">
+        <p>${pelicula.descripcion}</p>
+        <div class="botones-container">
+            <button id="ver-btn-${index + 1}" class="btn-ver">Ver Película</button>
+            <button id="favorito-btn-${index + 1}" class="btn-favorito">
+                ❤️ Agregar a Favoritos
+            </button>
+        </div>
+    </div>
+`;const verBtn=document.getElementById(`ver-btn-${index + 1}`);const favoritoBtn=document.getElementById(`favorito-btn-${index + 1}`);verificarVIP(verBtn,peliculaId);favoritoBtn.addEventListener('click',()=>agregarAFavoritos(peliculaId,pelicula))}})})}
+function verificarVIP(verBtn,peliculaId){auth.onAuthStateChanged((user)=>{if(user){const userId=user.uid;const userRef=firebase.database().ref(`usuarios/${userId}/nivel_de_plan`);userRef.on('value',(snapshot)=>{const nivelDePlan=snapshot.val();if(nivelDePlan&&(nivelDePlan==='vip1'||nivelDePlan==='vip2'||nivelDePlan==='vip3'||nivelDePlan==='vip4')){verBtn.disabled=!1;verBtn.addEventListener('click',()=>{window.location.href=`ver.html?id=${peliculaId}`})}else{verBtn.disabled=!0;mostrarNotificacion()}})}else{mostrarNotificacion()}})}
+function mostrarNotificacion(){Swal.fire({icon:'error',title:'¡Acceso denegado!',text:'No tienes acceso VIP para ver esta película.',confirmButtonText:'Cerrar',background:'#f8d7da',color:'#721c24',confirmButtonColor:'#721c24',})}
+function agregarAFavoritos(peliculaId,pelicula){auth.onAuthStateChanged((user)=>{if(user){const userId=user.uid;const userRef=firebase.database().ref(`usuarios/${userId}/peliculas_favoritas`);userRef.child(peliculaId).set(pelicula).then(()=>{const alerta=document.getElementById('alerta-agregada');alerta.classList.add('show');alerta.textContent='¡Película agregada a tus favoritos!';setTimeout(()=>{alerta.classList.remove('show')},1000)}).catch((error)=>{console.error('Error al agregar a favoritos:',error);alert('Ocurrió un error al agregar la película a tus favoritos.')})}else{alert('Por favor, inicia sesión para agregar películas a tus favoritos.')}})}
+document.addEventListener('DOMContentLoaded',cargarPeliculas)
