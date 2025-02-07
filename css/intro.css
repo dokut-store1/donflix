@@ -1,0 +1,49 @@
+        /* Contenedor del video */
+        #intro-video {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: black;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+            overflow: hidden;
+        }
+
+        /* Video en PC */
+        #video-bienvenida-pc {
+            width: 100vw;
+            height: 100vh;
+            object-fit: cover;
+            object-position: center;
+        }
+
+        /* Video en celular */
+        #video-bienvenida-celular {
+            display: none;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: center;
+        }
+
+        /* Video en celular (se muestra solo en dispositivos con pantallas pequeñas) */
+        @media (max-width: 768px) {
+            #video-bienvenida-pc {
+                display: none;
+            }
+
+            #video-bienvenida-celular {
+                display: block;
+            }
+        }
+
+        /* Ocultar el video con animación */
+        .ocultar {
+            opacity: 0;
+            transition: opacity 1s ease-in-out;
+            pointer-events: none;
+        }

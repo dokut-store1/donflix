@@ -1,0 +1,112 @@
+
+
+
+.carousel-container {
+    position: relative;
+    width: 100%;
+}
+
+.carousel {
+    display: flex;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    scroll-behavior: smooth;
+    -webkit-overflow-scrolling: touch;
+    padding: 5px 0px;
+    margin: 13px; 
+}
+.carousel::-webkit-scrollbar {
+    display: none;
+}
+
+.carousel-item {
+    flex: 0 0 auto;
+    scroll-snap-align: start;
+    margin: 0 10px;
+}
+
+.banner img {
+    width: 260px;
+    height: auto;
+    border-radius: 5px;
+    transition: transform 0.3s;
+}
+
+.banner img:hover {
+    transform: scale(1.05);
+}
+
+.banner img.pc {
+    display: block;
+}
+
+.banner img.celular {
+    display: none;
+}
+
+.nav-arrow {
+    position: absolute;
+    top: 42%;
+    transform: translateY(-50%);
+    background: rgba(0, 0, 0, 0.342);
+    color: rgb(255, 255, 255);
+    border: none;
+    padding: 10px;
+    cursor: pointer;
+    z-index: 10;
+}
+
+.nav-arrow-prev {
+    left: 7px;
+    border-top-left-radius: 30%;
+    border-bottom-left-radius: 30%;
+    color: brown;
+    font-size: 20px;
+}
+
+.nav-arrow-next {
+    right: 7px;
+    border-top-right-radius: 30%;
+    border-bottom-right-radius: 30%;
+    color: brown;
+    font-size: 20px;
+}
+
+.ver-mas {
+    color: rgb(255, 255, 255);
+    text-decoration: none;
+   font-size:  14px;
+   position: relative;  /* Mantén el flujo normal del documento */
+    top: 13px;  /* Ajusta el valor para mover el contenido hacia abajo */
+    
+}
+.ver-mas-container {
+    display: flex;
+    justify-content: flex-end;
+    right: 25px;
+}
+
+@media (max-width: 768px) {
+    .banner img.pc {
+        display: none;
+    }
+
+    .banner img.celular {
+        display: block;
+    }
+
+    .banner img {
+        width: 250px;
+    }  
+  
+    .nav-arrow-prev {
+        border-top-left-radius: 30%;
+        border-bottom-left-radius: 30%;
+    }
+
+    .nav-arrow-next {
+        border-top-right-radius: 30%;
+        border-bottom-right-radius: 30%;
+    }
+ 
+}

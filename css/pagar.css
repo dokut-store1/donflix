@@ -1,0 +1,8 @@
+.overlay{display:none;position:fixed;top:0;left:0;width:100%;height:100%;background-color:rgba(0,0,0,.8);z-index:9999;justify-content:center;align-items:center}
+.overlay-content{background-color:#fff;padding:30px;border-radius:10px;text-align:center;max-width:400px;margin:20px}
+.overlay-buttons{margin-top:20px}
+.overlay-button{padding:10px 20px;margin:0 10px;border:none;border-radius:5px;cursor:pointer;font-weight:bold}
+.btn-ok{background-color:#6c757d;color:#fff}
+.btn-renovar{background-color:#007bff;color:#fff}
+#alerta-agregada{display:none;position:fixed;top:20px;left:50%;transform:translateX(-50%);background-color:#2ecc71;color:#fff;padding:15px;border-radius:8px;font-size:16px;font-weight:bold;z-index:1000;box-shadow:0 0 10px rgba(0,0,0,.1);transition:opacity .3s ease}
+#alerta-agregada.show{display:block;opacity:1}

@@ -1,0 +1,79 @@
+.container {
+    display: grid;
+    grid-template-columns: 1fr;  /* Solo una columna por defecto */
+    gap: 20px;
+    max-width: 1200px;
+    width: 100%;
+    padding: 20px;  /* Padding agregado para no pegarse a los bordes */
+    box-sizing: border-box;
+    margin: 0 auto; /* Centrado horizontal */
+}
+
+.subscription-card {
+    background-color: #201f1f;
+    border: 1px solid #ddd;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    margin: 0 auto; /* Centrado de las tarjetas */
+    max-width: 100%; /* No se saldrá del contenedor */
+    min-height: 300px; /* Fija una altura mínima para todas las tarjetas */
+    min-width: 320px; /* Aumenta el ancho mínimo de las tarjetas */
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start; /* Asegura que el contenido se distribuya bien */
+    overflow: hidden; /* Oculta contenido que sobrepase el tamaño de la tarjeta */
+}
+
+.subscription-card h3 {
+    font-size: 22px;
+    margin-bottom: 10px;
+    flex-shrink: 0; /* Evita que el título se deforme */
+}
+
+.subscription-card p {
+    font-size: 14px;
+    margin-bottom: 10px;
+    flex-grow: 1; /* Permite que el contenido crezca sin cambiar el tamaño de la tarjeta */
+    overflow: hidden; /* Para que el texto largo no haga crecer la tarjeta */
+}
+
+.buy-btn {
+    background-color: #c20e0e;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s;
+    width: 100%;  /* Botón ocupa todo el ancho */
+    margin-top: auto; /* Asegura que el botón esté al final */
+    flex-shrink: 0; /* Evita que el botón se deforme */
+}
+
+.buy-btn:hover {
+    background-color: #218838;
+}
+
+/* Estilo para pantallas más grandes (tabletas, escritorio) */
+@media (min-width: 600px) {
+    .container {
+        grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));  /* Tarjetas más anchas en pantallas grandes */
+    }
+
+    .subscription-card h3 {
+        font-size: 24px;
+    }
+
+    .subscription-card p {
+        font-size: 16px;
+    }
+
+    .buy-btn {
+        font-size: 18px;
+    }
+}
+
+
